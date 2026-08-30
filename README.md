@@ -47,10 +47,11 @@ media-gallery tool returns public Shopify CDN resources, alt text, dimensions,
 preview images, hosted-video sources, and approved external-video links. Passing
 an exact live SKU resolves its Shopify variant ID and prioritizes the media
 associated with that variant. Compatible clients also receive the first
-selected image as bounded native MCP image content for inline display, while
-the original Shopify resource link remains available. HALO does not retain or
-rehost media and does not claim that a video exists unless Shopify's live
-product record returns it.
+selected image as bounded native MCP image content for inline display. The
+tool's text response also supplies an exact Markdown image fallback for clients
+that do not visibly render native MCP image content, while the original Shopify
+resource link remains available. HALO does not retain or rehost media and does
+not claim that a video exists unless Shopify's live product record returns it.
 
 ## Availability semantics
 
