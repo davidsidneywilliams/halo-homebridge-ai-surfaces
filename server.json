@@ -3,8 +3,8 @@
   "name": "com.homebridgepc.agent-commerce/halo-ai-surfaces",
   "title": "HALO Homebridge AI Surfaces",
   "description": "Live Shopify catalog and configuration for Homebridge's five major architectural product categories.",
-  "version": "1.0.1",
-  "websiteUrl": "https://homebridgepc.com/agents.md",
+  "version": "1.0.2",
+  "websiteUrl": "https://homebridgepc.com/pages/ai",
   "remotes": [
     {
       "type": "streamable-http",
@@ -12,4 +12,3 @@
     }
   ]
 }
-

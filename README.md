@@ -7,8 +7,10 @@ categories without requiring a customer to install a plugin.
 
 ## Public services
 
+- Homebridge AI & Structured Data page: <https://homebridgepc.com/pages/ai>
 - Remote MCP endpoint: <https://agent-commerce.homebridgepc.com/mcp-v2>
 - Live major-category catalog: <https://agent-commerce.homebridgepc.com/v1/catalog>
+- HALO discovery document: <https://agent-commerce.homebridgepc.com/.well-known/halo-agent-commerce.json>
 - Shopify-advertised AI index: <https://homebridgepc.com/ai/llms.txt>
 - AI guidance: <https://homebridgepc.com/agents.md>
 - Concise discovery file: <https://homebridgepc.com/llms.txt>
