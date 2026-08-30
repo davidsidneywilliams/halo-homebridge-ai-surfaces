@@ -11,7 +11,7 @@ configuration capabilities:
 | `configure_homebridge_fire_pit` | Resolves an exact fire-pit configuration against live Shopify data. | None |
 | `get_homebridge_major_category_catalog` | Returns approved products and exact live options for a major category. | None |
 | `resolve_homebridge_major_variant` | Resolves selected major-category options to a live Shopify variant and eligible links. | None |
-| `get_homebridge_product_media` | Returns a bounded gallery of live Shopify product images and videos; an exact SKU resolves its variant ID and prioritizes Shopify-associated media. | None |
+| `get_homebridge_product_media` | Returns bounded Shopify media resources plus a native inline image preview; an exact SKU resolves its variant ID and prioritizes Shopify-associated media. | None |
 | `prepare_homebridge_checkout` | Creates a buyer-controlled Shopify checkout handoff after explicit confirmation. | OAuth |
 
 ## Example discovery request
