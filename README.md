@@ -52,8 +52,8 @@ tool's text response also supplies an exact Markdown image fallback for clients
 that do not visibly render native MCP image content, while the original Shopify
 resource link remains available. HALO does not retain or rehost media and does
 not claim that a video exists unless Shopify's live product record returns it.
-ChatGPT-compatible clients can additionally render the media tool through a
-read-only product card supplied by HALO's MCP UI resource.
+MCP Apps-compatible clients can additionally render the media tool through a
+read-only product card supplied by HALO's standard MCP UI resource.
 
 ## Availability semantics
 
