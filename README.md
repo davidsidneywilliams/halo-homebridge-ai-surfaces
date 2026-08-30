@@ -34,11 +34,19 @@ represented by component or placeholder prices.
 - Approved Homebridge category and product data
 - Exact live Shopify variants and SKUs where applicable
 - Current Shopify prices and availability
+- Live Shopify-hosted primary images, galleries, and associated video metadata
 - Configuration options and required disclosures
 - Attributed product links and eligible Shopify cart links
 - Buyer-controlled handoff to Shopify Checkout
 
 HALO does not place orders, collect payment, or bypass Shopify Checkout.
+
+Catalog products include a compact primary-media summary and exact variants
+include their Shopify-associated featured image when available. The bounded
+media-gallery tool returns public Shopify CDN resources, alt text, dimensions,
+preview images, hosted-video sources, and approved external-video links. HALO
+does not copy media and does not claim that a video exists unless Shopify's live
+product record returns it.
 
 ## Availability semantics
 
