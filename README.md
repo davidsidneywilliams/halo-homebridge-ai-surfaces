@@ -9,6 +9,7 @@ categories without requiring a customer to install a plugin.
 
 - Remote MCP endpoint: <https://agent-commerce.homebridgepc.com/mcp-v2>
 - Live major-category catalog: <https://agent-commerce.homebridgepc.com/v1/catalog>
+- Shopify-advertised AI index: <https://homebridgepc.com/ai/llms.txt>
 - AI guidance: <https://homebridgepc.com/agents.md>
 - Concise discovery file: <https://homebridgepc.com/llms.txt>
 - Extended discovery file: <https://homebridgepc.com/llms-full.txt>
@@ -59,4 +60,3 @@ rules, and operational data are not published here.
 
 See [SECURITY.md](SECURITY.md) and [PRIVACY.md](PRIVACY.md) for the public safety
 and data-handling boundaries.
-
