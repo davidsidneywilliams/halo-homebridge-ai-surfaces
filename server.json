@@ -2,7 +2,7 @@
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "com.homebridgepc.agent-commerce/halo-ai-surfaces",
   "title": "HALO Homebridge AI Surfaces",
-  "description": "Live Shopify catalog, media, and configuration for Homebridge's major architectural products.",
+  "description": "Optional MCP interface for HALO's zero-install live Shopify catalog, media, configuration, and commerce handoff.",
   "version": "1.1.0",
   "websiteUrl": "https://homebridgepc.com/pages/ai",
   "remotes": [

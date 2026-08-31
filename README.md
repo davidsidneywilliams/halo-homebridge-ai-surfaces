@@ -1,21 +1,47 @@
 # HALO Homebridge AI Surfaces
 
-HALO is Homebridge Precast's public, machine-readable product discovery and
-configuration surface for AI assistants. It provides live Shopify-backed
-catalog information for Homebridge's five major architectural product
-categories without requiring a customer to install a plugin.
+HALO is Homebridge Precast's zero-install, machine-readable commerce surface for
+AI assistants and search agents. It exposes approved, live Shopify-backed
+catalog data so an assistant can discover a product category, qualify missing
+choices, resolve an exact purchasable variant, show its associated image and
+current price, and hand the buyer to the correct Shopify cart or product page.
 
-## Public services
+Customers do **not** need to install a plugin, connect an account, or know that
+HALO exists. A remote MCP interface remains available as an optional integration
+for clients that support it.
 
-- Homebridge AI & Structured Data page: <https://homebridgepc.com/pages/ai>
-- Remote MCP endpoint: <https://agent-commerce.homebridgepc.com/mcp-v2>
+## Zero-install discovery
+
+- Zero-install contract: <https://agent-commerce.homebridgepc.com/.well-known/halo-zero-install.json>
+- Discovery overview: <https://agent-commerce.homebridgepc.com/v1/discovery>
+- Human- and crawler-readable discovery: <https://agent-commerce.homebridgepc.com/discover>
 - Live major-category catalog: <https://agent-commerce.homebridgepc.com/v1/catalog>
-- HALO discovery document: <https://agent-commerce.homebridgepc.com/.well-known/halo-agent-commerce.json>
-- Shopify-advertised AI index: <https://homebridgepc.com/ai/llms.txt>
+- Approved brand and category videos: <https://agent-commerce.homebridgepc.com/v1/videos>
+- OpenAPI description: <https://agent-commerce.homebridgepc.com/openapi.json>
+- Homebridge AI & Structured Data page: <https://homebridgepc.com/pages/ai>
 - AI guidance: <https://homebridgepc.com/agents.md>
 - Concise discovery file: <https://homebridgepc.com/llms.txt>
 - Extended discovery file: <https://homebridgepc.com/llms-full.txt>
-- Official MCP Registry name: `com.homebridgepc.agent-commerce/halo-ai-surfaces`
+
+Category discovery pages are available at `/discover/{category}`, and live
+catalog data is available at `/v1/catalog/{category}`.
+
+## Shopper flow
+
+HALO supports a conversational path without forcing an assistant to guess:
+
+1. Discover an approved Homebridge category and its live options.
+2. Ask only for choices needed to distinguish compatible variants.
+3. Resolve the completed selection to an exact Shopify variant and SKU.
+4. Return current price, availability, disclosures, and variant-associated
+   Shopify media.
+5. Offer an attributed product link or eligible Shopify cart link controlled by
+   the buyer.
+
+Partial fire-pit selections return the remaining questions instead of silently
+choosing a shape, body, fuel, or tabletop finish. Exact major-category variants
+can be resolved through the public configuration and resolver endpoints
+described in the [OpenAPI document](https://agent-commerce.homebridgepc.com/openapi.json).
 
 ## Major-category coverage
 
@@ -29,45 +55,39 @@ Accessories, merchandise, tools, plaques, lighting, and other minor items are
 intentionally excluded. Retaining-wall systems require consultation and are not
 represented by component or placeholder prices.
 
-## What HALO provides
+## Product media and videos
 
-- Approved Homebridge category and product data
-- Exact live Shopify variants and SKUs where applicable
-- Current Shopify prices and availability
-- Live Shopify-hosted primary images, galleries, and associated video metadata
-- Configuration options and required disclosures
-- Attributed product links and eligible Shopify cart links
-- Buyer-controlled handoff to Shopify Checkout
+Exact variants return their Shopify-associated featured image when available.
+HALO preserves the Shopify variant ID, SKU, selected options, current price, and
+destination URL so the image and commerce action describe the same selection.
 
-HALO does not place orders, collect payment, or bypass Shopify Checkout.
+HALO also publishes approved Homebridge videos mapped at the brand or major
+category level. These associations let an assistant show relevant educational
+video for a general Homebridge, garden-bed, fire-pit, greenhouse, culvert-cover,
+or retaining-wall question without claiming that a category video documents a
+specific SKU. Seasonal material is excluded from the active map unless it is
+explicitly enabled.
 
-Catalog products include a compact primary-media summary and exact variants
-include their Shopify-associated featured image when available. The bounded
-media-gallery tool returns public Shopify CDN resources, alt text, dimensions,
-preview images, hosted-video sources, and approved external-video links. Passing
-an exact live SKU resolves its Shopify variant ID and prioritizes the media
-associated with that variant. Compatible clients also receive the first
-selected image as bounded native MCP image content for inline display. The
-tool's text response also supplies an exact Markdown image fallback for clients
-that do not visibly render native MCP image content, while the original Shopify
-resource link remains available. HALO does not retain or rehost media and does
-not claim that a video exists unless Shopify's live product record returns it.
-MCP Apps-compatible clients can additionally render the media tool through a
-read-only product card supplied by HALO's standard MCP UI resource.
+## Optional MCP interface
 
-## Availability semantics
+- Remote MCP endpoint: <https://agent-commerce.homebridgepc.com/mcp-v2>
+- Official MCP Registry name: `com.homebridgepc.agent-commerce/halo-ai-surfaces`
+- MCP tool reference: [TOOLS.md](TOOLS.md)
+
+MCP can provide native tool calls and compatible product-card rendering, but it
+is an additional distribution path—not a requirement for public discovery.
+
+## Commerce and availability boundaries
+
+HALO can produce attributed product and cart links, but it cannot place an
+order, submit payment, or bypass Shopify Checkout. Shopify remains authoritative
+for buyer identity, shipping, taxes, discounts, payment, and final order
+completion.
 
 Many Homebridge products are made to order. Shopify inventory quantities may be
-untracked while a variant remains available for sale. HALO describes these
-products as **available to order; made to order; lead time applies**. It does
-not interpret untracked inventory as zero stock.
-
-## Authentication boundary
-
-Public catalog discovery and configuration tools do not require a customer
-account. The separate checkout-session action is OAuth-protected, scoped, and
-merchant controlled. Product links and cart links never submit an order or
-payment.
+untracked while a variant remains available for sale. HALO describes these as
+**available to order; made to order; lead time applies** rather than treating
+untracked inventory as zero stock.
 
 ## Documentation-only repository
 
