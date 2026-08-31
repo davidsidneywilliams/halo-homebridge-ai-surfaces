@@ -12,6 +12,9 @@ provides an optional native tool surface.
 | `/v1/discovery` | Machine-readable overview of the public surface. | None |
 | `/discover` | Human- and crawler-readable discovery index. | None |
 | `/discover/{category}` | Crawlable category landing page with structured product data and actions. | None |
+| `/discover/{category}/{sku}` | Stable exact-variant HTML page with Product/Offer JSON-LD, selected image, live price, disclosures, and eligible commerce links. | None |
+| `/robots.txt` | Explicit crawler policy for public discovery and protected-path exclusions. | None |
+| `/sitemap.xml` | Live sitemap of category and exact-variant discovery pages. | None |
 | `/v1/catalog` | Lists approved major categories. | None |
 | `/v1/catalog/{category}` | Returns approved live products and options for one category. | None |
 | `/v1/configure/fire-pit` | Qualifies a partial fire-pit request or resolves a completed configuration. | None |

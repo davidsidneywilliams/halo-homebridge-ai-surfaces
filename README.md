@@ -15,6 +15,8 @@ for clients that support it.
 - Zero-install contract: <https://agent-commerce.homebridgepc.com/.well-known/halo-zero-install.json>
 - Discovery overview: <https://agent-commerce.homebridgepc.com/v1/discovery>
 - Human- and crawler-readable discovery: <https://agent-commerce.homebridgepc.com/discover>
+- Exact-configuration sitemap: <https://agent-commerce.homebridgepc.com/sitemap.xml>
+- Crawler policy: <https://agent-commerce.homebridgepc.com/robots.txt>
 - Live major-category catalog: <https://agent-commerce.homebridgepc.com/v1/catalog>
 - Approved brand and category videos: <https://agent-commerce.homebridgepc.com/v1/videos>
 - OpenAPI description: <https://agent-commerce.homebridgepc.com/openapi.json>
@@ -23,8 +25,11 @@ for clients that support it.
 - Concise discovery file: <https://homebridgepc.com/llms.txt>
 - Extended discovery file: <https://homebridgepc.com/llms-full.txt>
 
-Category discovery pages are available at `/discover/{category}`, and live
-catalog data is available at `/v1/catalog/{category}`.
+Category discovery pages are available at `/discover/{category}`, stable exact
+variant pages at `/discover/{category}/{sku}`, and live catalog data at
+`/v1/catalog/{category}`. Exact-variant pages publish Product and Offer JSON-LD,
+the selected Shopify image, current price and availability, required disclosures,
+and eligible buyer-controlled commerce links.
 
 ## Shopper flow
 
