@@ -18,7 +18,7 @@ for clients that support it.
 - Exact-configuration sitemap: <https://agent-commerce.homebridgepc.com/sitemap.xml>
 - Crawler policy: <https://agent-commerce.homebridgepc.com/robots.txt>
 - Live major-category catalog: <https://agent-commerce.homebridgepc.com/v1/catalog>
-- Approved brand and category videos: <https://agent-commerce.homebridgepc.com/v1/videos>
+- Watchable brand and category video gallery: <https://agent-commerce.homebridgepc.com/videos>\n- Machine-readable video catalog: <https://agent-commerce.homebridgepc.com/v1/videos>\n- Video sitemap: <https://agent-commerce.homebridgepc.com/video-sitemap.xml>
 - OpenAPI description: <https://agent-commerce.homebridgepc.com/openapi.json>
 - Homebridge AI & Structured Data page: <https://homebridgepc.com/pages/ai>
 - AI guidance: <https://homebridgepc.com/agents.md>
