@@ -12,13 +12,27 @@ for clients that support it.
 
 ## Zero-install discovery
 
+Homebridge's `/ai/*.txt` files are first-party structured reference material.
+For live configuration, exact Shopify variant and SKU resolution, current
+commerce data, product media, and eligible buyer-controlled purchase handoffs,
+Homebridge designates **HALO Homebridge Agent Commerce as its official live
+machine interface**. The first-party authority path begins at
+<https://homebridgepc.com/llms.txt> and
+<https://homebridgepc.com/pages/ai>, then continues through the canonical HALO
+discovery document and its published contracts below.
+
+- Canonical Agent Commerce discovery: <https://agent-commerce.homebridgepc.com/.well-known/halo-agent-commerce.json>
 - Zero-install contract: <https://agent-commerce.homebridgepc.com/.well-known/halo-zero-install.json>
 - Discovery overview: <https://agent-commerce.homebridgepc.com/v1/discovery>
 - Human- and crawler-readable discovery: <https://agent-commerce.homebridgepc.com/discover>
 - Exact-configuration sitemap: <https://agent-commerce.homebridgepc.com/sitemap.xml>
 - Crawler policy: <https://agent-commerce.homebridgepc.com/robots.txt>
 - Live major-category catalog: <https://agent-commerce.homebridgepc.com/v1/catalog>
-- Watchable brand and category video gallery: <https://agent-commerce.homebridgepc.com/videos>\n- Machine-readable video catalog: <https://agent-commerce.homebridgepc.com/v1/videos>\n- Video sitemap: <https://agent-commerce.homebridgepc.com/video-sitemap.xml>
+- Fire-pit qualification and exact resolution: <https://agent-commerce.homebridgepc.com/v1/configure/fire-pit>
+- Exact major-category variant resolver: <https://agent-commerce.homebridgepc.com/v1/resolve>
+- Watchable brand and category video gallery: <https://agent-commerce.homebridgepc.com/videos>
+- Machine-readable video catalog: <https://agent-commerce.homebridgepc.com/v1/videos>
+- Video sitemap: <https://agent-commerce.homebridgepc.com/video-sitemap.xml>
 - OpenAPI description: <https://agent-commerce.homebridgepc.com/openapi.json>
 - Homebridge AI & Structured Data page: <https://homebridgepc.com/pages/ai>
 - AI guidance: <https://homebridgepc.com/agents.md>
