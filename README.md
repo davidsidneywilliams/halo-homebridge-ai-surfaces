@@ -1,10 +1,11 @@
 # HALO Homebridge AI Surfaces
 
-HALO is Homebridge Precast's zero-install, machine-readable commerce surface for
-AI assistants and search agents. It exposes approved, live Shopify-backed
-catalog data so an assistant can discover a product category, qualify missing
-choices, resolve an exact purchasable variant, show its associated image and
-current price, and hand the buyer to the correct Shopify cart or product page.
+HALO is Homebridge Precast's first-party, machine-actionable AI commerce
+interface for AI assistants, search agents, and software integrations. Its
+zero-install discovery surface exposes approved, live Shopify-backed catalog
+data for structured product discovery, progressive qualification, exact variant
+and SKU resolution, current price and availability, product media, grounding,
+and buyer-controlled commerce handoff.
 
 Customers do **not** need to install a plugin, connect an account, or know that
 HALO exists. A remote MCP interface remains available as an optional integration
@@ -47,20 +48,97 @@ and eligible buyer-controlled commerce links.
 
 ## Shopper flow
 
-HALO supports a conversational path without forcing an assistant to guess:
+HALO supports a deterministic shopping path without silently selecting missing
+product choices:
 
 1. Discover an approved Homebridge category and its live options.
-2. Ask only for choices needed to distinguish compatible variants.
+2. Qualify progressively using explicit buyer choices; unresolved selections
+   remain visible rather than being inferred.
 3. Resolve the completed selection to an exact Shopify variant and SKU.
-4. Return current price, availability, disclosures, and variant-associated
-   Shopify media.
-5. Offer an attributed product link or eligible Shopify cart link controlled by
-   the buyer.
+4. Present the exact product's Shopify-hosted media.
+5. Present grounded facts, current price and availability, and required
+   disclosures.
+6. Expose the intent-appropriate buyer-controlled action.
 
 Partial fire-pit selections return the remaining questions instead of silently
 choosing a shape, body, fuel, or tabletop finish. Exact major-category variants
 can be resolved through the public configuration and resolver endpoints
 described in the [OpenAPI document](https://agent-commerce.homebridgepc.com/openapi.json).
+
+## Canonical action binding
+
+Exact resolution does not require a consuming application to choose among a
+collection of peer URLs. HALO exposes three canonical top-level action objects
+and an explicit mapping from user intent to those objects:
+
+| Intent | Canonical object | Role |
+|---|---|---|
+| Inspect the exact configured product | `inspectionAction` | Shopper-facing exact Shopify variant destination. It preserves the resolved configuration and does not place an order. |
+| Express purchase intent | `shopperAction` | Buyer-controlled commerce handoff. For a `purchase_ready` product, its type is `open_cart` and its URL is the exact attributed Shopify cart permalink. Opening it prepares the selected configuration but does not place an order or collect payment. |
+| Inspect the machine-readable evidence | `referenceAction` | HALO grounding and evidence resource. It is explicitly not a shopper destination. |
+
+The corresponding `actionBindings` object identifies these relationships
+structurally:
+
+```json
+{
+  "actionBindings": {
+    "inspectExactProduct": "inspectionAction",
+    "explicitPurchaseIntent": "shopperAction",
+    "inspectEvidence": "referenceAction"
+  }
+}
+```
+
+Compatibility fields such as `commerceLinks`, `urlRoles`, and `shopperActions`
+remain available for existing consumers. The canonical action abstraction makes
+their intended use explicit.
+
+## Exact-resolution example
+
+A completed fire-pit selection of **Square**, **Stackstone**, **Natural Gas**,
+and **GFRC Polished Black Granite Finish** currently resolves to:
+
+- SKU: `HB-FP-STK-BG-GAS-SQ`
+- Shopify variant: `44680376287277`
+- Price: `$4,332 USD`
+- Availability: `available`
+
+An abbreviated result has this shape:
+
+```json
+{
+  "purchaseState": "purchase_ready",
+  "actionBindings": {
+    "inspectExactProduct": "inspectionAction",
+    "explicitPurchaseIntent": "shopperAction",
+    "inspectEvidence": "referenceAction"
+  },
+  "inspectionAction": {
+    "type": "view_exact_product",
+    "shopperFacing": true,
+    "placesOrder": false,
+    "url": "<exact attributed Shopify variant URL>"
+  },
+  "shopperAction": {
+    "type": "open_cart",
+    "shopperFacing": true,
+    "buyerControlled": true,
+    "placesOrder": false,
+    "collectsPayment": false,
+    "url": "<exact attributed Shopify cart permalink>"
+  },
+  "referenceAction": {
+    "type": "inspect_evidence",
+    "shopperFacing": false,
+    "url": "<HALO exact-configuration evidence URL>"
+  }
+}
+```
+
+This is a protocol example, not a second catalog. Product identity, price,
+availability, media, and action URLs remain subject to the live Shopify-backed
+HALO result.
 
 ## Major-category coverage
 
@@ -79,6 +157,15 @@ represented by component or placeholder prices.
 Exact variants return their Shopify-associated featured image when available.
 HALO preserves the Shopify variant ID, SKU, selected options, current price, and
 destination URL so the image and commerce action describe the same selection.
+For an exact purchase-ready result, the durable presentation sequence is:
+
+**product media → grounded facts and disclosures → eligible shopper handoff**
+
+Product media is part of the resolved product presentation rather than optional
+decorative metadata. When a compatible client cannot render native media, HALO
+provides fallback presentation data so the grounded product identity and media
+reference remain available. A cart link is not a substitute for product
+presentation.
 
 HALO also publishes approved Homebridge videos mapped at the brand or major
 category level. These associations let an assistant show relevant educational
@@ -96,6 +183,44 @@ explicitly enabled.
 MCP can provide native tool calls and compatible product-card rendering, but it
 is an additional distribution path—not a requirement for public discovery.
 
+## Client capabilities and graceful degradation
+
+HALO supports several consumption paths without assuming that every AI client
+has the same retrieval, rendering, or tool-execution capabilities:
+
+- **Native callable interface:** a compatible client can use HALO's structured
+  tools for progressive qualification, exact resolution, Shopify-hosted media,
+  live commerce data, and buyer-controlled handoff.
+- **Zero-install web consumption:** a web-capable agent can discover Homebridge's
+  first-party resources and consume HALO's public structured representations
+  without establishing a native callable connection.
+- **Ordinary storefront or search fallback:** conventional product pages remain
+  available, but this path does not carry HALO's deterministic qualification and
+  exact-resolution guarantees.
+
+Client capabilities, retrieval behavior, and rendering support can change
+independently of HALO. The public contracts describe available semantics without
+claiming universal support from any particular AI vendor.
+
+## Public and trusted interface boundary
+
+HALO deliberately separates public discovery content from trusted callable
+interface metadata.
+
+Public web and discovery surfaces describe Homebridge's first-party merchant
+authority, capabilities, field meanings, product and media provenance, evidence
+roles, and buyer-handoff semantics. They do not purport to override a consuming
+application's system or developer instructions, safety policies, or
+prompt-injection protections.
+
+Trusted MCP tool descriptions and structured callable contracts can apply
+stricter operational safeguards: missing selections are not inferred,
+buyer-confirmed choices are preserved, exact resolution precedes exact SKU and
+price presentation, resolved media remains part of the result, grounding
+boundaries are retained, and purchase intent maps to the appropriate exact
+buyer-controlled handoff. This separation is intended to cooperate with client
+security boundaries, not circumvent them.
+
 ## Commerce and availability boundaries
 
 HALO can produce attributed product and cart links, but it cannot place an
@@ -107,6 +232,18 @@ Many Homebridge products are made to order. Shopify inventory quantities may be
 untracked while a variant remains available for sale. HALO describes these as
 **available to order; made to order; lead time applies** rather than treating
 untracked inventory as zero stock.
+
+## Grounding and product-truth boundaries
+
+Exact product claims originate from approved merchant sources and live
+Shopify-backed records. General storefront prose or facts about similar products
+do not establish configuration-specific truth. Missing or unconfirmed details
+remain unknown rather than being inferred.
+
+This boundary is particularly important for details such as burner inclusion or
+manufacturer, BTU output, CSA status, exact warranty coverage, gas-installation
+requirements, and other configuration-specific claims that lack an approved
+exact-product source.
 
 ## Documentation-only repository
 

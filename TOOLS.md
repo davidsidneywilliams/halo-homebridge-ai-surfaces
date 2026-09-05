@@ -19,6 +19,7 @@ provides an optional native tool surface.
 | `/v1/catalog/{category}` | Returns approved live products and options for one category. | None |
 | `/v1/configure/fire-pit` | Qualifies a partial fire-pit request or resolves a completed configuration. | None |
 | `/v1/resolve` | Resolves exact major-category options to a live Shopify variant. | None |
+| `/resolve/{sku}` | Resolves a known exact SKU and exposes canonical inspection, purchase, and evidence actions plus compatibility URL fields. | None |
 | `/v1/videos` | Returns approved brand- and category-level video associations. | None |
 | `/openapi.json` | Describes the public HTTP contract. | None |
 
@@ -41,7 +42,12 @@ provides an optional native tool surface.
 An agent can inspect the discovery contract, read the fire-pit options, and ask
 for any missing body, tabletop finish, fuel, or shape. Once complete, it can
 resolve the selection to an exact SKU, price, Shopify-hosted image, availability,
-disclosures, product URL, and eligible cart URL.
+disclosures, and three canonical intent bindings: `inspectionAction` for the
+exact configured Shopify variant, `shopperAction` for the eligible buyer-controlled
+cart or consultation handoff, and `referenceAction` for non-shopper evidence.
+The `actionBindings` object maps exact-product inspection, explicit purchase
+intent, and evidence inspection to those canonical objects. Compatibility URL
+fields remain available for existing consumers.
 
 The live Shopify catalog remains authoritative for price, availability,
 shipping, taxes, discounts, and payment.
