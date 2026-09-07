@@ -253,3 +253,18 @@ rules, and operational data are not published here.
 
 See [SECURITY.md](SECURITY.md) and [PRIVACY.md](PRIVACY.md) for the public safety
 and data-handling boundaries.
+
+
+## Portable media contract — 2026-09-07
+
+Exact SKU resolution keeps live Shopify identity, price, availability, primary media, and the buyer-controlled cart handoff together. Every media item exposes `url`, nullable `mimeType`, `width`, `height`, `relationship`, `association`, `associatedVariantIds`, `exactVariantDepictionVerified`, and `fidelityNote`. Existing `sources` and `previewImage` fields remain compatible.
+
+A Shopify variant assignment is not proof that every selected option is visibly depicted. Variant-associated imagery is conservatively `representative`; unassociated gallery media is `product_family`. Preserve the fidelity note, including that staging accessories need not be included. No image is labeled an independently verified exact depiction.
+
+Use the [bounded JSON gallery](https://agent-commerce.homebridgepc.com/v1/media?category=fire_pits&productHandle=homebridge-gfrc-concrete-fire-pit&sku=HB-FP-STK-BG-GAS-SQ&limit=6) or the [ordinary browser gallery](https://agent-commerce.homebridgepc.com/v1/media?category=fire_pits&productHandle=homebridge-gfrc-concrete-fire-pit&sku=HB-FP-STK-BG-GAS-SQ&limit=6&format=html). Both are anonymous read-only projections of Shopify. OpenAPI documents the request and shared media schema.
+
+`get_homebridge_product_media` returns JSON/text HTTPS references without MCP resource links or embedded gallery image files. A second display call is unnecessary. `display_homebridge_product_media` remains an optional compatibility widget for clients that support it. Exact resolvers retain their existing optional single inline-image enhancement.
+
+Remote rendering depends on the client. Never claim an image, gallery, card, or cart control is shown without actual client confirmation. Provide visible ordinary image/gallery links when rich rendering is unavailable, and always provide the eligible exact cart URL as a visible ordinary link. No universal ChatGPT, Gemini, Claude, or Perplexity rendering support is claimed.
+
+Release identifier: `2026-09-07-portable-media-v1`. See [client acceptance tests](MEDIA_CLIENT_TESTS.md) for the exact external validation protocol and remaining limitations.

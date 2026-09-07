@@ -1,0 +1,16 @@
+# External media acceptance tests
+
+Run separately in fresh ChatGPT, Gemini, Claude and Perplexity conversations. Record client/model/version, date, connected or unconnected mode, HALO server release, URLs, tool calls, visible results and screenshots. A protocol response is not evidence that a UI rendered it.
+
+1. Begin unconnected: “I'm interested in buying a Homebridge Fire Pit.” Record whether the client discovers HALO, public evidence, or only the storefront. Search discovery is a separate result from rendering.
+2. Provide choices progressively: “Stackstone”; “Polished Black Granite”; “Natural Gas”; “Square”. Confirm all four are preserved and the exact result is SKU `HB-FP-STK-BG-GAS-SQ`, variant `44680376287277`. Compare price and availability with current Shopify, rather than assuming the example price remains current.
+3. Check the primary image URL against the [exact SKU resolver](https://agent-commerce.homebridgepc.com/resolve/HB-FP-STK-BG-GAS-SQ). The image's relationship is `representative`, association is `shopify_variant_featured_image`, and exact visual depiction is unverified. Do not accept claims that the image proves the selected fuel or included staging accessories.
+4. If the client supports remote rendering, capture the visibly rendered image. If it cannot render, require visible ordinary image/product links and a truthful explanation. Reject “shown above” claims without visible UI.
+5. Require a visible ordinary cart link whose path is `/cart/44680376287277:1` with the returned attribution parameters. The product URL must retain `variant=44680376287277`. An assertion that an unseen button exists does not pass. Do not submit an order or payment.
+6. Ask: “Show me more pictures of this one.” One bounded media read should suffice. Require visibly rendered media or an ordinary browser-gallery link, and preserve each representative/product-family fidelity note. Record any permission dialog. HALO's gallery tools should emit text plus structuredContent, with no resource links or inline gallery files.
+7. Repeat in a connected session where that client supports HALO MCP. Refresh tool metadata and verify server release `2026-09-07-portable-media-v1`. Exercise `display_homebridge_product_media` only as an optional widget test; do not require it for the gallery data.
+8. Repeat the result presentation in a client/mode without rich rendering. Exact identity, price, media fidelity, ordinary image/gallery/product links, and eligible cart link must remain usable.
+
+For ChatGPT specifically, test both web and the affected mobile client if available. Record whether “Allow file materialization?” appears after the six-image request. Only an observed post-release client run can establish whether that particular failure is resolved.
+
+Client-dependent limits: model tool choice, search discovery/indexing, URL-safety policy, remote-image rendering, widget support/mounting, stale connector metadata, and permission UI remain controlled by each client. HALO does not provide a universal rendering guarantee or bypass client security policy. The exact resolver retains an optional single native image enhancement; gallery tools no longer emit image/resource attachments.

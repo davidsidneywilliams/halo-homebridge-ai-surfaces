@@ -20,6 +20,7 @@ provides an optional native tool surface.
 | `/v1/configure/fire-pit` | Qualifies a partial fire-pit request or resolves a completed configuration. | None |
 | `/v1/resolve` | Resolves exact major-category options to a live Shopify variant. | None |
 | `/resolve/{sku}` | Resolves a known exact SKU and exposes canonical inspection, purchase, and evidence actions plus compatibility URL fields. | None |
+| `/v1/media` | Bounded public HTTPS media with variant association and conservative fidelity; JSON by default or `format=html` for a browser gallery. | None |
 | `/v1/videos` | Returns approved brand- and category-level video associations. | None |
 | `/openapi.json` | Describes the public HTTP contract. | None |
 
@@ -33,8 +34,8 @@ provides an optional native tool surface.
 | `configure_homebridge_fire_pit` | Qualifies or resolves a fire-pit configuration against live Shopify data. | None |
 | `get_homebridge_major_category_catalog` | Returns approved products and live options for a major category. | None |
 | `resolve_homebridge_major_variant` | Resolves selected options to a live variant and eligible commerce links. | None |
-| `get_homebridge_product_media` | Returns bounded Shopify media and exact-variant product-card data. | None |
-| `display_homebridge_product_media` | Displays the resolved read-only product card in compatible clients. | None |
+| `get_homebridge_product_media` | Returns bounded Shopify HTTPS media as structured JSON/text without file attachments; one call suffices. | None |
+| `display_homebridge_product_media` | Optional read-only widget adapter. Rendering is client-dependent and never assumed. | None |
 | `prepare_homebridge_checkout` | Prepares a buyer-controlled Shopify checkout handoff after confirmation. | OAuth |
 
 ## Example zero-install request
